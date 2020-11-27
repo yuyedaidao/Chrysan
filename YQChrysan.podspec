@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.swift_versions = '5.3'
   spec.ios.deployment_target  = '10.0'
 
-  spec.source_files       = 'Chrysan/Sources/**/*'
+  spec.source_files   = 'Chrysan/Sources/*.swift', 'Chrysan/Sources/**/*.swift'
   spec.framework      = 'UIKit'
   spec.dependency 'SnapKit', '~> 5.0'
 end
