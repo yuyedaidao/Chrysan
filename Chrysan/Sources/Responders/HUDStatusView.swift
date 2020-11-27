@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 public final class HUDStatusView: UIView {
     
     public class Options {
@@ -38,7 +36,7 @@ public final class HUDStatusView: UIView {
         public var messageFont: UIFont
         /// 文本对齐方式，默认 center
         public var messageAlignment: NSTextAlignment
-//        public var backgroundActive
+
         private var _textColor: UIColor?
         
         public init(
