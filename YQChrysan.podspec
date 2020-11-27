@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = 'YQChrysan'
-  spec.version       = '3.0.0'
+  spec.version       = '3.0.1'
   spec.license       = { :type => 'MIT' }
   spec.homepage      = 'https://github.com/yuyedaidao/Chrysan'
   spec.authors       = { 'yuyedaidao' => 'wyqpadding@gmail.com' }
