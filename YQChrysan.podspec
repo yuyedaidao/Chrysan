@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   spec.version       = '3.0.0'
   spec.license       = { :type => 'MIT' }
   spec.homepage      = 'https://github.com/yuyedaidao/Chrysan'
-  spec.authors       = { 'padding' => 'wyqpadding@gmail.com' }
+  spec.authors       = { 'yuyedaidao' => 'wyqpadding@gmail.com' }
   spec.summary       = 'A status indicator library (HUD) for UIKit forked from https://github.com/Harley-xk/Chrysan'
   spec.source        = { :git => 'https://github.com/yuyedaidao/Chrysan.git', :tag => spec.version }
   spec.module_name   = 'Chrysan'
