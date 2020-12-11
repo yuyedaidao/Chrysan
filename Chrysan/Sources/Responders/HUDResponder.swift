@@ -67,7 +67,7 @@ public class HUDResponder: StatusResponder {
             layoutStatusView(in: host)
         }
         switch new.id {
-        case .loading:
+        case .loading, .progress:
             host.isUserInteractionEnabled = true
         default:
             host.isUserInteractionEnabled = false
