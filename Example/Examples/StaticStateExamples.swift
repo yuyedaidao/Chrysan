@@ -15,8 +15,9 @@ struct SuccessStateExample: AnyChyrsanExample {
     let name = "Success State"
     
     func show(in viewController: UIViewController) {
-        viewController.chrysan.changeStatus(to: .success(message: "保存成功"))
-        viewController.chrysan.hide(afterDelay: 1)
+//        viewController.chrysan.changeStatus(to: .success(message: "保存成功"))
+//        viewController.chrysan.hide(afterDelay: 1)
+        viewController.chrysan.showHUD(.success(message: "保存成功"), hideAfterDelay: 2)
     }
 }
 
@@ -25,8 +26,10 @@ struct FailureStateExample: AnyChyrsanExample {
     let name = "Failure State"
     
     func show(in viewController: UIViewController) {
-        viewController.chrysan.changeStatus(to: .failure(message: "保存成功"))
-        viewController.chrysan.hide(afterDelay: 1)
+//        viewController.chrysan.changeStatus(to: .failure(message: "保存成功"))
+//        viewController.chrysan.hide(afterDelay: 1)
+
+        viewController.chrysan.showHUD(.failure(message: "保存失败"), hideAfterDelay: 9)
     }
 }
 

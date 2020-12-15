@@ -36,7 +36,8 @@ public class Chrysan: UIView {
     
     /// 当前状态
     public var status: Status = .idle
-    
+    /// 旧状态
+    public var oldStaus: Status = .idle
     /// 活跃状态，HUD 可见
     public var isActive: Bool {
         return !isHidden
@@ -58,7 +59,6 @@ public class Chrysan: UIView {
     /// 更新 Status
     /// - Parameter newStatus: 新的状态
     public func changeStatus(to newStatus: Status) {
-        print(self.hudResponder.debugDescription)
         guard let _ = superview else {
             return
         }
@@ -66,15 +66,16 @@ public class Chrysan: UIView {
         if newStatus != .idle, isHidden {
             isHidden = false
         }
-        responder.changeStatus(from: status, to: newStatus, for: self) {
+        oldStaus = status
+        status = newStatus
+        oldStaus.dispatchWorkItem?.cancel()
+        responder.changeStatus(from: oldStaus, to: status, for: self) {
             self.didChangeStatus(to: newStatus)
         }
     }
     
     /// Chrysan 完成状态转换，会在动画完成后被调用
     public func didChangeStatus(to newStatus: Status) {
-        self.status = newStatus
-        
         if newStatus == .idle {
             self.isHidden = true
         }
@@ -82,17 +83,23 @@ public class Chrysan: UIView {
     
     /// 隐藏 Chrysan
     /// - Parameter delay: 延迟时间，单位：秒。在指定延迟之后隐藏，默认为 0，不延迟
-    public func hide(afterDelay delay: TimeInterval = 0) {
+    public func hide(afterDelay delay: TimeInterval = 0) -> DispatchWorkItem? {
         if delay > 0 {
             let work = DispatchWorkItem(block: {[self] in
-                guard hudResponder?.delayWorkUUID == status.delayHideUUID else {
+                guard let work = self.oldStaus.dispatchWorkItem else {
+                    changeStatus(to: .idle)
+                    return
+                }
+                guard work.isCancelled else {
                     return
                 }
                 changeStatus(to: .idle)
             })
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000)), execute: work)
+            return work
         } else {
             changeStatus(to: .idle)
+            return nil
         }
     }
     
@@ -150,8 +157,7 @@ public extension Chrysan {
         forceHUD()
         changeStatus(to: status)
         if let delay = delay {
-            hudResponder?.delayWorkUUID = status.delayHideUUID
-            hide(afterDelay: delay)
+            self.status.dispatchWorkItem = hide(afterDelay: delay)
         }
     }
     

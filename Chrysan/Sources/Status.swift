@@ -29,7 +29,8 @@ public struct Status {
     /// 触摸事件是否能穿透 loading和progress默认不能,其他默认可以
     public var isTouchThroughable: Bool
     
-    public var delayHideUUID: UUID = UUID()
+//    public var delayHideUUID: UUID = UUID()
+    public var dispatchWorkItem: DispatchWorkItem?
     
     public init(
         id: ID,
