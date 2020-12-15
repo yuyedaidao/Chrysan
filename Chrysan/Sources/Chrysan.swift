@@ -59,12 +59,13 @@ public class Chrysan: UIView {
     /// 更新 Status
     /// - Parameter newStatus: 新的状态
     public func changeStatus(to newStatus: Status) {
-        guard let _ = superview else {
+        guard let superview = superview else {
             return
         }
         
         if newStatus != .idle, isHidden {
             isHidden = false
+            superview.bringSubviewToFront(self)
         }
         oldStaus = status
         status = newStatus
