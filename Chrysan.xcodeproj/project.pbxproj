@@ -544,8 +544,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+<<<<<<< HEAD
 				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iqilu.Chrysan;
+=======
+				MARKETING_VERSION = 2.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.harley.chrysan;
+>>>>>>> 690e1c03ec33c07183890052cea1499c34ec36c2
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -572,8 +577,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+<<<<<<< HEAD
 				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iqilu.Chrysan;
+=======
+				MARKETING_VERSION = 2.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.harley.chrysan;
+>>>>>>> 690e1c03ec33c07183890052cea1499c34ec36c2
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
