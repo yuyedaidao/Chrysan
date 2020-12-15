@@ -18,7 +18,7 @@ public class HUDResponder: StatusResponder {
     /// HUD 样式配置项，修改全局响应器的样式，可以全局生效
     public var viewOptions: HUDStatusView.Options
     
-    public init(viewOptions: HUDStatusView.Options = .init()) {
+    private init(viewOptions: HUDStatusView.Options = .init()) {
         self.viewOptions = viewOptions
         
         // register default factories
@@ -53,7 +53,7 @@ public class HUDResponder: StatusResponder {
     public func registerIndicator(for statusId: Status.ID, factory: @escaping HUDIndicatorFactory.Make) {
         factories[statusId] = HUDIndicatorFactory(factory)
     }
-    
+    public var delayWorkUUID: UUID?
     // last running animator
     private weak var lastAnimator: UIViewPropertyAnimator?
     
@@ -66,12 +66,11 @@ public class HUDResponder: StatusResponder {
         if new != .idle, statusView == nil {
             layoutStatusView(in: host)
         }
-        switch new.id {
-        case .loading, .progress:
-            host.isUserInteractionEnabled = true
-        default:
+        statusView?.isUserInteractionEnabled = true
+        if new.isTouchThroughable {
             host.isUserInteractionEnabled = false
-            statusView?.isUserInteractionEnabled = true
+        } else {
+            host.isUserInteractionEnabled = true
         }
         // if the last status transforming is not finished, force to stop
         if let last = lastAnimator, last.isRunning {

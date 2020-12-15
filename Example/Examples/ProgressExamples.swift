@@ -17,7 +17,7 @@ class ProgressExample: AnyChyrsanExample {
     
     func startProgress() {
         progress = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (_) in
             self.updateProgress()
             self.progress += Double.random(in: 0 ... 0.2)
         })
@@ -27,7 +27,6 @@ class ProgressExample: AnyChyrsanExample {
     
     func updateProgress() {
         host?.chrysan.showHUD(progress: progress, message: "正在下载")
-//        host?.chrysan.changeStatus(to: .progress(message: "正在下载", progress: progress))
         if progress > 1 {
             timer.invalidate()
             timer = nil
@@ -41,7 +40,7 @@ class ProgressExample: AnyChyrsanExample {
     
     func show(in viewController: UIViewController) {
         host = viewController
-        viewController.chrysan.changeStatus(to: .loading(message: "准备下载"))
+//        viewController.chrysan.changeStatus(to: .loading(message: "准备下载"))
         DispatchQueue.main.asyncAfter(seconds: 1) {
             self.startProgress()
         }

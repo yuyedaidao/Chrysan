@@ -26,17 +26,23 @@ public struct Status {
     /// 进度值文本，如果进度条支持进度文本，指定后将会显示该值
     /// 默认显示格式: String(format: "%.0f%%", progress * 100)
     public var progressText: String? = nil
+    /// 触摸事件是否能穿透 loading和progress默认不能,其他默认可以
+    public var isTouchThroughable: Bool
+    
+    public var delayHideUUID: UUID = UUID()
     
     public init(
         id: ID,
         message: String? = nil,
         progress: Double? = nil,
-        progressText: String? = nil
+        progressText: String? = nil,
+        isTouchThroughable: Bool = true
     ) {
         self.id = id
         self.message = message
         self.progress = progress
         self.progressText = progressText
+        self.isTouchThroughable = isTouchThroughable
     }
 }
 
@@ -64,7 +70,7 @@ public extension Status {
     /// 加载中状态, 所有的 loading 状态都具有相同的 id
     /// - Parameter message: 自定义消息内容
     static func loading(message: String? = nil) -> Status {
-        return Status(id: .loading, message: message)
+        return Status(id: .loading, message: message, isTouchThroughable: false)
     }
 
     /// 预设状态：带进度的状态，所有的 progress 状态都具有相同的 id
@@ -77,7 +83,8 @@ public extension Status {
             id: .progress,
             message: message,
             progress: progress,
-            progressText: progressText
+            progressText: progressText,
+            isTouchThroughable: false
         )
     }
     

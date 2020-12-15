@@ -60,22 +60,22 @@ class CustomIconExamplesViewController: UIViewController {
             return
         }
         let responder = chrysan.hudResponder
-        responder?.register(.imageIndicator(image: icon), for: status.id)
+//        responder?.register(.imageIndicator(image: icon), for: status.id)
         chrysan.changeStatus(to: status)
         chrysan.hide(afterDelay: 1)
     }
     
     func showChrysanForSFSymbol(at indexPath: IndexPath) {
-        let name = IconSections[indexPath.section].iconNames[indexPath.row]
-        let status = Status(id: "SF-Symbol-" + name, message: name)
-        let responder = chrysan.hudResponder
-        if #available(iOS 13.0, *) {
-            responder?.register(.imageIndicator(systemName: name), for: status.id)
-            chrysan.changeStatus(to: status)
-            chrysan.hide(afterDelay: 1)
-        } else {
-            // Fallback on earlier versions
-        }
+//        let name = IconSections[indexPath.section].iconNames[indexPath.row]
+//        let status = Status(id: "SF-Symbol-" + name, message: name)
+//        let responder = chrysan.hudResponder
+//        if #available(iOS 13.0, *) {
+//            responder?.register(.imageIndicator(systemName: name), for: status.id)
+//            chrysan.changeStatus(to: status)
+//            chrysan.hide(afterDelay: 1)
+//        } else {
+//            // Fallback on earlier versions
+//        }
     }
 }
 

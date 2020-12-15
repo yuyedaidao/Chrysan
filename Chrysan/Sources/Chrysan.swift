@@ -58,7 +58,7 @@ public class Chrysan: UIView {
     /// 更新 Status
     /// - Parameter newStatus: 新的状态
     public func changeStatus(to newStatus: Status) {
-
+        print(self.hudResponder.debugDescription)
         guard let _ = superview else {
             return
         }
@@ -66,7 +66,6 @@ public class Chrysan: UIView {
         if newStatus != .idle, isHidden {
             isHidden = false
         }
-        
         responder.changeStatus(from: status, to: newStatus, for: self) {
             self.didChangeStatus(to: newStatus)
         }
@@ -85,9 +84,13 @@ public class Chrysan: UIView {
     /// - Parameter delay: 延迟时间，单位：秒。在指定延迟之后隐藏，默认为 0，不延迟
     public func hide(afterDelay delay: TimeInterval = 0) {
         if delay > 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000))) { [weak self] in
-                self?.changeStatus(to: .idle)
-            }
+            let work = DispatchWorkItem(block: {[self] in
+                guard hudResponder?.delayWorkUUID == status.delayHideUUID else {
+                    return
+                }
+                changeStatus(to: .idle)
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000)), execute: work)
         } else {
             changeStatus(to: .idle)
         }
@@ -134,7 +137,7 @@ public extension Chrysan {
     
     private func forceHUD() {
         guard hudResponder != nil else {
-            responder = HUDResponder()
+            responder = HUDResponder.global
             return
         }
     }
@@ -145,10 +148,9 @@ public extension Chrysan {
     ///   - delay: auto hide hud after delay seconds if set
     func showHUD(_ status: Status, hideAfterDelay delay: TimeInterval? = nil) {
         forceHUD()
-        
         changeStatus(to: status)
-        
         if let delay = delay {
+            hudResponder?.delayWorkUUID = status.delayHideUUID
             hide(afterDelay: delay)
         }
     }
