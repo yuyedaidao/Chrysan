@@ -84,7 +84,7 @@ public class Chrysan: UIView {
     
     /// 隐藏 Chrysan
     /// - Parameter delay: 延迟时间，单位：秒。在指定延迟之后隐藏，默认为 0，不延迟
-    public func hide(afterDelay delay: TimeInterval = 0) -> DispatchWorkItem? {
+    @discardableResult public func hide(afterDelay delay: TimeInterval = 0) -> DispatchWorkItem? {
         if delay > 0 {
             let work = DispatchWorkItem(block: {[self] in
                 guard let work = self.oldStaus.dispatchWorkItem else {
@@ -119,7 +119,7 @@ extension Chrysan {
     func fill(in target: UIView) {
         if #available(iOS 13.0, *) {
             let layoutGuide = UILayoutGuide()
-            target.superview?.addLayoutGuide(layoutGuide)
+            target.addLayoutGuide(layoutGuide)
             target.addSubview(self)
             self.snp.makeConstraints {
                 $0.left.equalTo(layoutGuide.snp.left)
