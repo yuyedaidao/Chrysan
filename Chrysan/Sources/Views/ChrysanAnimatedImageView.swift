@@ -46,13 +46,13 @@ import MobileCoreServices
 ///
 /// Kingfisher supports setting GIF animated data to either `UIImageView` and `AnimatedImageView` out of box. So
 /// it would be fairly easy to switch between them.
-open class AnimatedImageView: UIImageView {
+open class ChrysanAnimatedImageView: UIImageView {
     
     /// Proxy object for preventing a reference cycle between the `CADDisplayLink` and `AnimatedImageView`.
     class TargetProxy {
-        private weak var target: AnimatedImageView?
+        private weak var target: ChrysanAnimatedImageView?
         
-        init(target: AnimatedImageView) {
+        init(target: ChrysanAnimatedImageView) {
             self.target = target
         }
         
@@ -264,7 +264,7 @@ open class AnimatedImageView: UIImageView {
     }
 }
 
-extension AnimatedImageView {
+extension ChrysanAnimatedImageView {
     
     // Represents a single frame in a GIF.
     struct AnimatedFrame {
@@ -296,7 +296,7 @@ extension AnimatedImageView {
     }
 }
 
-extension AnimatedImageView {
+extension ChrysanAnimatedImageView {
     
     // MARK: - Animator
     class Animator {

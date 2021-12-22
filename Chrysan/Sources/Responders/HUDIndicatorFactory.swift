@@ -53,9 +53,9 @@ public struct HUDIndicatorFactory {
     }
     
     /// 使用 GIF 动图的状态指示器
-    public static func gifIndicator(data: Data, repeatCount: AnimatedImageView.RepeatCount = .infinite) -> HUDIndicatorFactory {
+    public static func gifIndicator(data: Data, repeatCount: ChrysanAnimatedImageView.RepeatCount = .infinite) -> HUDIndicatorFactory {
         return HUDIndicatorFactory { _ in
-            let imageView = AnimatedImageView(data: data, repeatCount: repeatCount)
+            let imageView = ChrysanAnimatedImageView(data: data, repeatCount: repeatCount)
             return imageView
         }
     }
