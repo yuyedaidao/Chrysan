@@ -160,6 +160,9 @@ public class HUDResponder: StatusResponder {
                     .lessThanOrEqualTo(chrysan.snp.bottom)
                     .inset(layout.padding.bottom)
             }
+            if let width = chrysan.status.widthConstraint {
+                $0.width.greaterThanOrEqualTo(width)
+            }
             
         }
         statusView = view

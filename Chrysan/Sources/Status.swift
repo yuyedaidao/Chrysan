@@ -32,6 +32,9 @@ public struct Status {
 //    public var delayHideUUID: UUID = UUID()
     public var dispatchWorkItem: DispatchWorkItem?
     
+    // 宽度约束，如果设置了此值就会自动加上大于等于此值的约束
+    public var widthConstraint: CGFloat?
+    
     public init(
         id: ID,
         message: String? = nil,
