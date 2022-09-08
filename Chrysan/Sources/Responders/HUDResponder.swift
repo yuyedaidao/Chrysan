@@ -75,7 +75,7 @@ public class HUDResponder: StatusResponder {
         // if the last status transforming is not finished, force to stop
         if let last = lastAnimator, last.isRunning {
             last.stopAnimation(false)
-            last.finishAnimation(at: .end)
+            last.finishAnimation(at: .current) // 不能用 end,因为用回调时机不好控制，用 end 会完成走完流程，有可能会在新方法调用后把视图清理了
         }
         // 准备执行动画，设置相关视图的起始状态
         prepareAnimation(for: host, from: current, to: new)
